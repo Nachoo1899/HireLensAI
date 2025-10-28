@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireLens AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif;}
+    body {background-color: #f4f6f8; color: #1a1a1a;}
+    a {text-decoration: none; color: inherit;}
+
+    /* Contenedor principal */
+    .container {max-width: 900px; margin: 40px auto; padding: 20px;}
+
+    /* Header */
+    header {text-align: center; margin-bottom: 40px;}
+    header h1 {font-size: 2.5rem; color: #0d47a1;}
+    header p {font-size: 1.1rem; color: #333; margin-top: 10px;}
+
+    /* Sección de HireLens AI */
+    .section {background-color: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 40px;}
+    .section h2 {color: #0d47a1; margin-bottom: 15px;}
+    .section p {margin-bottom: 20px; line-height: 1.6;}
+
+    /* Chat */
+    .chat-container {display:flex; flex-direction:column; height:500px; border:1px solid #ccc; border-radius:12px; overflow:hidden;}
+    .chat-messages {flex:1; padding:15px; overflow-y:auto; background-color: #f9f9f9;}
+    .chat-message {margin-bottom:10px;}
+    .chat-message.user {text-align:right;}
+    .chat-message.user .msg {display:inline-block; background-color:#0d47a1; color:#fff; padding:8px 12px; border-radius:12px;}
+    .chat-message.bot .msg {display:inline-block; background-color:#e0e0e0; color:#000; padding:8px 12px; border-radius:12px;}
+    .chat-input {display:flex; border-top:1px solid #ccc;}
+    .chat-input input {flex:1; padding:10px 15px; border:none; outline:none; font-size:1rem;}
+    .chat-input button {background-color:#0d47a1; color:#fff; border:none; padding:0 20px; cursor:pointer; transition:0.2s;}
+    .chat-input button:hover {background-color:#094081;}
+
+    /* Botón principal */
+    .btn-primary {background-color:#0d47a1; color:#fff; padding:12px 25px; border-radius:8px; border:none; cursor:pointer; font-weight:600; transition:0.2s;}
+    .btn-primary:hover {background-color:#094081;}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>HireLens AI</h1>
+    <p>Filtrado inteligente de CVs con inteligencia artificial para mejorar tus procesos de reclutamiento.</p>
+  </header>
+
+  <div class="section">
+    <h2>¿Qué hace HireLens AI?</h2>
+    <p>HireLens AI analiza rápidamente currículums, identificando fortalezas y debilidades de los candidatos y ofreciendo recomendaciones. Reduce sesgos y optimiza la eficiencia del reclutamiento.</p>
+  </div>
+
+  <div class="section">
+    <h2>Chat de soporte / demo</h2>
+    <div class="chat-container">
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-message bot"><div class="msg">Hola! Soy HireLens AI. ¿En qué puedo ayudarte hoy?</div></div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Escribe tu mensaje...">
+        <button id="sendBtn">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  function addMessage(text, sender) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('chat-message', sender);
+    msgDiv.innerHTML = `<div class="msg">${text}</div>`;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    chatInput.value = '';
+
+    // Respuesta demo del bot
+    setTimeout(() => {
+      addMessage('Esta es una respuesta de demo de HireLens AI.', 'bot');
+    }, 800);
+  });
+
+  chatInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') sendBtn.click();
+  });
+</script>
+
+</body>
+</html>
